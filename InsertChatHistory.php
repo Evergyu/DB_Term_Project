@@ -3,6 +3,20 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 $conn=mysqli_connect('192.168.167.3', 'leeingyu', '1234', 'leeingyu_term',4567);
+
+if(array_key_exists('INSERT',$_POST)){
+    INSERT();
+}
+else if(array_key_exists('INSERT',$_POST)){
+    SHOW();
+}
+function INSERT(){
+    mysqli_query($conn, "쿼리문");
+}
+function SHOW(){
+
+}
+
 ?>
 
 <!doctype html>
@@ -22,7 +36,9 @@ $conn=mysqli_connect('192.168.167.3', 'leeingyu', '1234', 'leeingyu_term',4567);
         <input type="number" name="ChatCode" placeholder="ChatCode(int)">
         <input type="text" name="ChatHistory" placeholder="ChatHistory(string)">
         <br><br>
-        <input type="button" value="INSERT">
-        <input type="button" value="SHOW">
+        <form method="post">
+        <input type="button" name="INSERT" value="INSERT">
+        <input type="button" name="SHOW" value="SHOW">
+        </form>
     </body>
 </html>

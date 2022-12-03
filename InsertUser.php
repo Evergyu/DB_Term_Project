@@ -2,22 +2,32 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$conn=mysqli_connect('192.168.167.3', 'leeingyu', '1234', 'leeingyu_term',4567);
+if(array_key_exists('INSERT',$_POST)){
+    INSERT();
+}
+else if(array_key_exists('INSERT',$_POST)){
+    SHOW();
+}
+function INSERT(){
+    $conn=mysqli_connect('192.168.167.3', 'leeingyu', '1234', 'leeingyu_term',4567);
 
-mysqli_query($conn, "
-    INSERT INTO USER1(
-        UserID,
-        PW,
-        Name,
-        Age,
-        NickName) VALUES (
-            1,
-            '1',
-            '1',
-            1,
-            '1'
-            )"    
-)
+    $ID=$_GET['ID'];
+    echo htmlspecialchars($_GET['id']);
+    $PW=$_GET['PW'];
+    $Name=$_GET['Name'];
+    $Age=$_GET['Age'];
+    $NickName=$_GET['NickName'];
+
+    mysqli_query($conn, "INSERT INTO USER1 (ID,PW,Name,Age,NickName) VALUES($ID,$PW,$Name,$Age,$NickName)");
+}
+function SHOW(){
+    $conn=mysqli_connect('192.168.167.3', 'leeingyu', '1234', 'leeingyu_term',4567);
+
+  
+
+    
+}
+
 ?>
 
 <!doctype html>
@@ -38,9 +48,11 @@ mysqli_query($conn, "
         <input type="text" name="PW" placeholder="PW(string)">
         <input type="text" name="Name" placeholder="Name(string)">
         <input type="number" name="Age" placeholder="Age(int)">
-        <input type="text" name="NickName" placeholder="Nickname(string)">
+        <input type="text" name="NickName" placeholder="NickName(string)">
         <br><br>
-        <input type="button" value="INSERT">
-        <input type="button" value="SHOW">
+        <form method="post">
+        <input type="button" name="INSERT" value="INSERT">
+        <input type="button" name="SHOW" value="SHOW">
+        </form>
     </body>
 </html>
